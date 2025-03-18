@@ -99,8 +99,10 @@ class GalleryActivity : ComponentActivity() {
                 BottomRow()
 
             }
+            val context: Context = LocalContext.current
+            val intent_input: Intent = Intent(context, InputActivity::class.java)
             FloatingActionButton(
-                onClick = {},
+                onClick = {startActivity(intent_input)},
                 modifier = Modifier
                     .align(Alignment.BottomEnd)
                     .padding(bottom = 80.dp, end = 5.dp)
