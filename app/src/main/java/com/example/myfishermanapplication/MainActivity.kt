@@ -42,10 +42,8 @@ class MainActivity : ComponentActivity() {
             Column()
         }
     }
-
     @Composable
     fun Column() {
-
         val context: Context = LocalContext.current
         val intent_list: Intent = Intent(context, ListActivity::class.java)
         val intent_gallety: Intent = Intent(context, GalleryActivity::class.java)
@@ -60,6 +58,9 @@ class MainActivity : ComponentActivity() {
         ) {
             Text(text = "witaj w androidzie!")
             Text(text = "Ekran AAA!")
+
+
+
             Row(
                 modifier = Modifier
                     .fillMaxSize()
@@ -100,12 +101,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
 }
-
 
 @Composable
 @Preview (showBackground = true)
 fun AAA() {
-
 }

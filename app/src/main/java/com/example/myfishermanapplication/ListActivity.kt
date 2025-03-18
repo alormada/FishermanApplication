@@ -26,6 +26,8 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
@@ -53,10 +55,7 @@ class ListActivity : ComponentActivity() {
     @Composable
     fun Column() {
 
-        val context: Context = LocalContext.current
-        val intent_list: Intent = Intent(context, ListActivity::class.java)
-        val intent_gallety: Intent = Intent(context, GalleryActivity::class.java)
-        val intent_main: Intent = Intent(context, MainActivity::class.java)
+
 
         androidx.compose.foundation.layout.Column(
             modifier = Modifier
@@ -65,45 +64,86 @@ class ListActivity : ComponentActivity() {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceEvenly
         ) {
-            Text(text = "witaj w androidzie!")
-            Text(text = "Ekran CCC!")
-            Row(
+
+            val itemmList = remember { mutableStateListOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25) }
+
+
+            LazyColumn (
+                verticalArrangement = Arrangement.spacedBy(4.dp),
                 modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 10.dp, start = 5.dp, end = 5.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.Bottom
+                    .padding(top = 20.dp, bottom = 10.dp)
+                    .fillMaxHeight(0.93f)
+                    .fillMaxWidth(1f),
+                contentPadding = PaddingValues(top=20.dp)
+
+            ){
+                items(items = itemmList){ item ->
+//                    Text(text = "$item")
+                    Button(
+                        onClick = {},
+                        modifier = Modifier
+                            .padding(start = 5.dp, end = 5.dp, top = 2.dp)
+                            .height(80.dp)
+                            .fillMaxSize(),
+
+                    ) {
+                        Text(
+                            text = "Ryba: $item",
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .wrapContentSize()
+                        )
+                    }
+                }
+            }
+            BottomRow()
+
+        }
+    }
+    @Composable
+    fun BottomRow() {
+        val context: Context = LocalContext.current
+        val intent_list: Intent = Intent(context, ListActivity::class.java)
+        val intent_gallety: Intent = Intent(context, GalleryActivity::class.java)
+        val intent_main: Intent = Intent(context, MainActivity::class.java)
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(bottom = 10.dp, start = 5.dp, end = 5.dp, top = 0.dp),
+
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.Bottom,
+
+        ) {
+            Button(
+                onClick = {
+                    startActivity(intent_list)
+                    finish()
+                }
+            ){
+                Icon(
+                    imageVector = Icons.Default.List, contentDescription = "list icon"
+                )
+            }
+            Button(
+                onClick = {
+                    startActivity(intent_main)
+                    finish()
+                }
             ) {
-                Button(
-                    onClick = {
-                        startActivity(intent_list)
-                        finish()
-                    }
-                ){
-                    Icon(
-                        imageVector = Icons.Default.List, contentDescription = "list icon"
-                    )
+                Icon(
+                    imageVector = Icons.Outlined.Home, contentDescription = "home icon"
+                )
+            }
+            Button (
+                onClick = {
+                    startActivity(intent_gallety)
+                    finish()
                 }
-                Button(
-                    onClick = {
-                        startActivity(intent_main)
-                        finish()
-                    }
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Home, contentDescription = "home icon"
-                    )
-                }
-                Button (
-                    onClick = {
-                        startActivity(intent_gallety)
-                        finish()
-                    }
-                ){
-                    Icon(
-                        imageVector = Icons.Default.AccountBox, contentDescription = "account icon",
-                    )
-                }
+            ){
+                Icon(
+                    imageVector = Icons.Default.AccountBox, contentDescription = "account icon",
+                )
             }
         }
     }
