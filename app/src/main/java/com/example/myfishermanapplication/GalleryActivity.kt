@@ -7,99 +7,138 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material3.Button
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myfishermanapplication.ui.theme.MyFishermanApplicationTheme
 
 class GalleryActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            Column()
+            ColumnWithInput()
         }
     }
+}
 
-    @Composable
-    fun Column() {
+// ✅ Move this function OUTSIDE the class to avoid "Unresolved reference" error
+@Composable
+fun ColumnWithInput() {
+    val context: Context = LocalContext.current
+    val intentList = Intent(context, ListActivity::class.java)
+    val intentGallery = Intent(context, GalleryActivity::class.java)
+    val intentMain = Intent(context, MainActivity::class.java)
 
-        val context: Context = LocalContext.current
-        val intent_list: Intent = Intent(context, ListActivity::class.java)
-        val intent_gallety: Intent = Intent(context, GalleryActivity::class.java)
-        val intent_main: Intent = Intent(context, MainActivity::class.java)
+    // State to store input text
+    var textState by remember { mutableStateOf(TextFieldValue("")) }
 
-        androidx.compose.foundation.layout.Column(
+    Column(
+        modifier = Modifier
+            .background(Color.LightGray)
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceEvenly
+    ) {
+        Text(text = "Co dzisiaj złowiłeś?", style = MaterialTheme.typography.headlineSmall)
+        Text(text = "Ekran BBB!")
+
+        // Input Field
+        OutlinedTextField(
+            value = textState,
+            onValueChange = { textState = it },
+            label = { Text("Enter some data") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Input Field
+        OutlinedTextField(
+            value = textState,
+            onValueChange = { textState = it },
+            label = { Text("Enter some data") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Input Field
+        OutlinedTextField(
+            value = textState,
+            onValueChange = { textState = it },
+            label = { Text("Enter some data") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Input Field
+        OutlinedTextField(
+            value = textState,
+            onValueChange = { textState = it },
+            label = { Text("Enter some data") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Input Field
+        OutlinedTextField(
+            value = textState,
+            onValueChange = { textState = it },
+            label = { Text("Enter some data") },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        // Button to process input
+        Button(onClick = { /* Handle input submission */ }) {
+            Text("Submit")
+        }
+
+        Row(
             modifier = Modifier
-                .background(Color.LightGray)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
+                .fillMaxWidth()
+                .padding(top = 20.dp),
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            verticalAlignment = Alignment.Bottom
         ) {
-            Text(text = "witaj w androidzie!")
-            Text(text = "Ekran BBB!")
-            Row(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(bottom = 10.dp, start = 5.dp, end = 5.dp),
-                horizontalArrangement = Arrangement.SpaceEvenly,
-                verticalAlignment = Alignment.Bottom
+            Button(
+                onClick = {
+                    context.startActivity(intentList)
+                }
             ) {
-                Button(
-                    onClick = {
-                        startActivity(intent_list)
-                        finish()
-                    }
-                ){
-                    Icon(
-                        imageVector = Icons.Default.List, contentDescription = "list icon"
-                    )
+                Icon(
+                    imageVector = Icons.Default.List, contentDescription = "list icon"
+                )
+            }
+            Button(
+                onClick = {
+                    context.startActivity(intentMain)
                 }
-                Button(
-                    onClick = {
-                        startActivity(intent_main)
-                        finish()
-                    }
-                ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Home, contentDescription = "home icon"
-                    )
+            ) {
+                Icon(
+                    imageVector = Icons.Outlined.Home, contentDescription = "home icon"
+                )
+            }
+            Button(
+                onClick = {
+                    context.startActivity(intentGallery)
                 }
-                Button (
-                    onClick = {
-                        startActivity(intent_gallety)
-                        finish()
-                    }
-                ){
-                    Icon(
-                        imageVector = Icons.Default.AccountBox, contentDescription = "account icon",
-                    )
-                }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.AccountBox, contentDescription = "account icon"
+                )
             }
         }
     }
 }
 
-
-
 @Preview(showBackground = true)
 @Composable
-fun CCC() {
-
+fun PreviewScreen() {
+    ColumnWithInput()
 }
