@@ -1,4 +1,4 @@
-package com.example.myfishermanapplication
+package com.example.myfishermanapplication.view
 
 import android.content.Context
 import android.content.Intent
@@ -27,7 +27,6 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material3.Button
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateListOf
@@ -38,7 +37,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.myfishermanapplication.ui.theme.MyFishermanApplicationTheme
+import com.example.myfishermanapplication.database.DatabaseConfiguration
+import com.example.myfishermanapplication.database.FishDatabaseRepository
+import com.example.myfishermanapplication.model.Fish
+import kotlinx.coroutines.runBlocking
+
+var fishList = mutableListOf<Fish>()
 
 class GalleryActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,6 +51,16 @@ class GalleryActivity : ComponentActivity() {
         setContent {
             Column()
         }
+    }
+
+    private fun getFishDatabase(fish: Fish){
+        val db = DatabaseConfiguration.getDatabase(this)
+        val fishDatabaseRepository = FishDatabaseRepository(db)
+
+        runBlocking {
+            fishList = fishDatabaseRepository.getAllFish().toMutableList()
+        }
+
     }
 
 
