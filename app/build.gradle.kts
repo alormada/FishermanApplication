@@ -58,11 +58,16 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
-    implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")  // Sprawdź, czy jest dostępna nowsza wersja
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
+
+    implementation("com.squareup:kotlinpoet:1.13.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.4.0")
+
 
     val room_version = "2.6.0"
     implementation("androidx.room:room-runtime:$room_version")
     kapt("androidx.room:room-compiler:$room_version")
     implementation("androidx.room:room-ktx:$room_version")
+
 }
