@@ -68,7 +68,7 @@ class GalleryActivity : ComponentActivity() {
                         Button(
                             onClick = {
                                 val intent = Intent(context, KnowledgeActivity::class.java).apply {
-                                    putExtra("fish_id", fish.id) // przekazujesz tylko ID
+                                    putExtra("fish_id", fish.id)
                                 }
                                 context.startActivity(intent)
                             },
@@ -78,7 +78,7 @@ class GalleryActivity : ComponentActivity() {
                                 .fillMaxWidth(),
                         ) {
                             Text(
-                                text = "Połów: ${fish.name}",
+                                text = "${fish.name}",
                                 modifier = Modifier.wrapContentSize()
                             )
                         }

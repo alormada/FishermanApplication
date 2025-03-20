@@ -59,7 +59,7 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")  // Sprawdź, czy jest dostępna nowsza wersja
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.0")
     implementation("com.squareup.moshi:moshi-kotlin:1.15.0")
 
     implementation("com.squareup:kotlinpoet:1.13.0")
@@ -76,6 +76,7 @@ dependencies {
     implementation("com.squareup.moshi:moshi-kotlin:1.14.0")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 
+    implementation("io.coil-kt:coil-compose:2.1.0")
 
 
 

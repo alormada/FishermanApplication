@@ -18,5 +18,6 @@ data class Fish(
     val length: String,
     val bait: String,
     val protectiveDimension : String,
-    val description: String
+    val description: String,
+    val imageUri: String? = null
 ): Parcelable
