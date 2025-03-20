@@ -72,24 +72,13 @@ class GalleryActivity : ComponentActivity() {
                                 .fillMaxWidth(),
                         ) {
                             Text(
-                                text = "Połów: ${fish.name}",
+                                text = fish.name,
                                 modifier = Modifier.wrapContentSize()
                             )
                         }
                     }
                 }
                 BottomRow()
-            }
-
-            val context: Context = LocalContext.current
-            val intent_input = Intent(context, InputActivity::class.java)
-            FloatingActionButton(
-                onClick = { startActivity(intent_input) },
-                modifier = Modifier
-                    .align(Alignment.BottomEnd)
-                    .padding(bottom = 80.dp, end = 5.dp)
-            ) {
-                Icon(Icons.Default.Add, contentDescription = "add icon")
             }
         }
     }
@@ -117,8 +106,7 @@ class GalleryActivity : ComponentActivity() {
                 Icon(Icons.Outlined.Home, contentDescription = "home icon")
             }
             Button(onClick = {
-                startActivity(Intent(context, GalleryActivity::class.java))
-                finish()
+
             }) {
                 Icon(Icons.Default.AccountBox, contentDescription = "account icon")
             }

@@ -72,8 +72,6 @@ class MainActivity : ComponentActivity() {
                 }
                 Button(
                     onClick = {
-                        startActivity(intent_main)
-                        finish()
                     }
                 ) {
                     Icon(

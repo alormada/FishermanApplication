@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -22,13 +23,19 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.filled.AccountBox
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import com.example.myfishermanapplication.viewmodel.GalleryViewModel
+import kotlin.getValue
 
 class ListActivity : ComponentActivity() {
+
+    private val galleryViewModel by viewModels<GalleryViewModel>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -37,53 +44,95 @@ class ListActivity : ComponentActivity() {
         }
     }
 
+
     @Composable
     fun Column() {
 
-
-        Column(
-            modifier = Modifier
-                .background(Color.LightGray)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.SpaceEvenly
-        ) {
-
-            val itemmList = remember { mutableStateListOf(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25) }
-
-
-            LazyColumn (
-                verticalArrangement = Arrangement.spacedBy(4.dp),
+        Box(modifier = Modifier.fillMaxSize()) {
+            androidx.compose.foundation.layout.Column(
                 modifier = Modifier
-                    .padding(top = 20.dp, bottom = 10.dp)
-                    .fillMaxHeight(0.93f)
-                    .fillMaxWidth(1f),
-                contentPadding = PaddingValues(top=20.dp)
+                    .background(Color.LightGray)
+                    .fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceEvenly
+            ) {
+                val itemmList = remember {
+                    mutableStateListOf(
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12,
+                        13,
+                        14,
+                        15,
+                        16,
+                        17,
+                        18,
+                        19,
+                        20,
+                        21,
+                        22,
+                        23,
+                        24,
+                        25
+                    )
+                }
 
-            ){
-                items(items = itemmList){ item ->
+
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    modifier = Modifier
+                        .padding(top = 20.dp, bottom = 10.dp)
+                        .fillMaxHeight(0.93f)
+                        .fillMaxWidth(1f),
+                    contentPadding = PaddingValues(top = 20.dp)
+
+                ) {
+                    items(items = itemmList) { item ->
 //                    Text(text = "$item")
-                    Button(
-                        onClick = {},
-                        modifier = Modifier
-                            .padding(start = 5.dp, end = 5.dp, top = 2.dp)
-                            .height(80.dp)
-                            .fillMaxSize(),
-
-                    ) {
-                        Text(
-                            text = "Ryba: $item",
+                        Button(
+                            onClick = {},
                             modifier = Modifier
-                                .fillMaxSize()
-                                .wrapContentSize()
-                        )
+                                .padding(start = 5.dp, end = 5.dp, top = 2.dp)
+                                .height(80.dp)
+                                .fillMaxSize(),
+
+                            ) {
+                            Text(
+                                text = "Ryba: $item",
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .wrapContentSize()
+                            )
+                        }
                     }
                 }
+                BottomRow()
             }
-            BottomRow()
 
+            val context: Context = LocalContext.current
+            val intent_input = Intent(context, InputActivity::class.java)
+            FloatingActionButton(
+                onClick = { startActivity(intent_input) },
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(bottom = 80.dp, end = 5.dp)
+            ) {
+                Icon(Icons.Default.Add, contentDescription = "add icon")
+            }
         }
+
     }
+
+
     @Composable
     fun BottomRow() {
         val context: Context = LocalContext.current
@@ -101,8 +150,6 @@ class ListActivity : ComponentActivity() {
         ) {
             Button(
                 onClick = {
-                    startActivity(intent_list)
-                    finish()
                 }
             ){
                 Icon(
