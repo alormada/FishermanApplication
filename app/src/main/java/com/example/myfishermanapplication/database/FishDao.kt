@@ -15,4 +15,8 @@ interface FishDao {
 
     @Query("SELECT * FROM fish")
     suspend fun getAll(): List<Fish>
+
+    @Query("SELECT * FROM fish WHERE id = :fishId LIMIT 1")
+    suspend fun getFishById(fishId: String): Fish?
+
 }

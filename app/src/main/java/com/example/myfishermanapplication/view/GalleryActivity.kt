@@ -64,19 +64,26 @@ class GalleryActivity : ComponentActivity() {
                     contentPadding = PaddingValues(top = 20.dp)
                 ) {
                     items(items = fishList) { fish ->
+                        val context = LocalContext.current
                         Button(
-                            onClick = { /* akcja po kliknięciu */ },
+                            onClick = {
+                                val intent = Intent(context, KnowledgeActivity::class.java).apply {
+                                    putExtra("fish_id", fish.id) // przekazujesz tylko ID
+                                }
+                                context.startActivity(intent)
+                            },
                             modifier = Modifier
                                 .padding(horizontal = 5.dp, vertical = 2.dp)
                                 .height(80.dp)
                                 .fillMaxWidth(),
                         ) {
                             Text(
-                                text = fish.name,
+                                text = "Połów: ${fish.name}",
                                 modifier = Modifier.wrapContentSize()
                             )
                         }
                     }
+
                 }
                 BottomRow()
             }

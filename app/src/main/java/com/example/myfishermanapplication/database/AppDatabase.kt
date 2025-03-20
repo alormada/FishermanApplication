@@ -11,7 +11,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.myfishermanapplication.model.Fish
 
 
-@Database(entities = [Fish::class], version = 8)
+@Database(entities = [Fish::class], version = 9)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun fishDao(): FishDao
 

@@ -8,6 +8,9 @@ class FishDatabaseRepository(private val db: AppDatabase) {
         return db.fishDao().getAll()
     }
 
+    suspend fun getFishById(fishId: String): Fish? {
+        return db.fishDao().getFishById(fishId)
+    }
 
 }
 
