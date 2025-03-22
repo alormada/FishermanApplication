@@ -16,8 +16,10 @@ class CatchViewModel(private val repository: CatchRepository) : ViewModel() {
         emptyList()
     )
 
-    fun insertCatch(catch: Catch) = viewModelScope.launch {
-        repository.insert(catch)
+    fun insertCatch(catch: Catch) {
+        viewModelScope.launch {
+            repository.insert(catch)
+        }
     }
 
     fun deleteCatch(catch: Catch) = viewModelScope.launch {

@@ -12,7 +12,7 @@ import com.example.myfishermanapplication.model.Catch
 import com.example.myfishermanapplication.model.Fish
 
 
-@Database(entities = [Fish::class, Catch::class], version = 12)
+@Database(entities = [Fish::class, Catch::class], version = 15)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun fishDao(): FishDao
     abstract fun catchDao(): CatchDao
@@ -42,8 +42,9 @@ abstract class AppDatabase : RoomDatabase() {
 
                 CoroutineScope(Dispatchers.IO).launch {
                     populateDatabase(INSTANCE!!.fishDao())
-                    populateCatchDatabase(INSTANCE!!.catchDao())
+                    // ← nie wywołujemy populateCatchDatabase()
                 }
+
             }
         }
 
@@ -73,13 +74,13 @@ abstract class AppDatabase : RoomDatabase() {
         }
 
         // (opcjonalne, jeśli chcesz mieć startowe dane Catch)
-        suspend fun populateCatchDatabase(catchDao: CatchDao) {
-            val predefinedCatches = listOf(
-                Catch(fishCount = "3", fishWeight = "5kg", location = "Jezioro Ładoga", notes = "Słoneczna pogoda, rano."),
-                Catch(fishCount = "1", fishWeight = "2kg", location = "Wisła, Warszawa", notes = "Silny nurt, trudne warunki.")
-            )
-            predefinedCatches.forEach { catchDao.insertCatch(it) }
-        }
+//        suspend fun populateCatchDatabase(catchDao: CatchDao) {
+//            val predefinedCatches = listOf(
+//                Catch(fishCount = "3", fishWeight = "5kg", location = "Jezioro Ładoga", notes = "Słoneczna pogoda, rano."),
+//                Catch(fishCount = "1", fishWeight = "2kg", location = "Wisła, Warszawa", notes = "Silny nurt, trudne warunki.")
+//            )
+//            predefinedCatches.forEach { catchDao.insertCatch(it) }
+//        }
     }
 }
 

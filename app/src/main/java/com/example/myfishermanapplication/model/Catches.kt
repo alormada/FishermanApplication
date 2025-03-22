@@ -14,4 +14,5 @@ data class Catch(
     val fishWeight: String,
     val location: String,
     val notes: String,
+    val date: String
 ): Parcelable
