@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.List
@@ -33,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
@@ -64,63 +64,101 @@ fun ColumnWithInput() {
         verticalArrangement = Arrangement.SpaceEvenly,
     ) {
 
-        Text(text = "Co dzisiaj złowiłeś?", style = MaterialTheme.typography.headlineSmall)
-        Text(text = "Ekran BBB!")
-
-
-        LazyColumn {
-
-            items(20) { index ->
-                // Input Field
-                OutlinedTextField(
-                    value = textState,
-                    onValueChange = { textState = it },
-                    label = { Text("Enter some data") },
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
-        }
-
-        // Button to process input
-        Button(onClick = { /* Handle input submission */ }) {
-            Text("Submit")
-        }
-
-        Row(
+        Column(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(top = 20.dp),
-            horizontalArrangement = Arrangement.SpaceEvenly,
-            verticalAlignment = Alignment.Bottom
+                .padding(top = 32.dp, start = 16.dp, end = 16.dp)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Button(
-                onClick = {
-                    context.startActivity(intentList)
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.List, contentDescription = "list icon"
-                )
-            }
-            Button(
-                onClick = {
-                    context.startActivity(intentMain)
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Outlined.Home, contentDescription = "home icon"
-                )
-            }
-            Button(
-                onClick = {
-                    context.startActivity(intentGallery)
-                }
-            ) {
-                Icon(
-                    imageVector = Icons.Default.AccountBox, contentDescription = "account icon"
-                )
-            }
+
+        Text(text = "Co dzisiaj złowiłeś?", style = MaterialTheme.typography.headlineSmall, textAlign = TextAlign.Center)
+
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+            Text(text = "Liczba złowionych ryb:", textAlign = TextAlign.Left)
+            OutlinedTextField(
+                value = textState,
+                onValueChange = { textState = it },
+                label = { Text("Podaj liczbe ryb, którą dzisiaj złowiłeś") },
+                modifier = Modifier.fillMaxWidth()
+            )
         }
+
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+            Text(text = "Łączna waga ryb:", textAlign = TextAlign.Left)
+            OutlinedTextField(
+                value = textState,
+                onValueChange = { textState = it },
+                label = { Text("Podaj całkowitą wagę złowionych ryb") },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+            Text(text = "Miejsce połowu:", textAlign = TextAlign.Left)
+            OutlinedTextField(
+                value = textState,
+                onValueChange = { textState = it },
+                label = { Text("Podaj lokalizację połowu") },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+        Column(modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)) {
+            Text(text = "Notatki:", textAlign = TextAlign.Left)
+            OutlinedTextField(
+                value = textState,
+                onValueChange = { textState = it },
+                label = { Text("Wprowadź swoje notatki") },
+                modifier = Modifier.fillMaxWidth()
+            )
+        }
+
+            // Button to process input
+            Button(onClick = { /* Handle input submission */ }) {
+                Text("Submit")
+            }
+
+            Row(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(top = 20.dp),
+                horizontalArrangement = Arrangement.SpaceEvenly,
+                verticalAlignment = Alignment.Bottom
+            ) {
+                Button(
+                    onClick = {
+                        context.startActivity(intentList)
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.List, contentDescription = "list icon"
+                    )
+                }
+                Button(
+                    onClick = {
+                        context.startActivity(intentMain)
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Home, contentDescription = "home icon"
+                    )
+                }
+                Button(
+                    onClick = {
+                        context.startActivity(intentGallery)
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.AccountBox, contentDescription = "account icon"
+                    )
+                }
+            }
+
+        }
+
+
+
     }
 }
 
