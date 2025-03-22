@@ -77,6 +77,9 @@ dependencies {
     kapt("com.squareup.moshi:moshi-kotlin-codegen:1.14.0")
 
     implementation("io.coil-kt:coil-compose:2.1.0")
+    implementation ("com.google.android.exoplayer:exoplayer:2.18.7")
+    implementation ("androidx.media3:media3-exoplayer:1.2.0")
+    implementation ("androidx.media3:media3-ui:1.2.0")
 
 
 
