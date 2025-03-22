@@ -29,6 +29,7 @@ import androidx.compose.material.icons.outlined.Home
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import com.example.myfishermanapplication.database.CatchRepository
 import com.example.myfishermanapplication.viewmodel.GalleryViewModel
 import kotlin.getValue
 
@@ -116,6 +117,9 @@ class ListActivity : ComponentActivity() {
                     }
                 }
                 BottomRow()
+            }
+            val catchRepository by lazy {
+                CatchRepository(database.catchDao())
             }
 
             val context: Context = LocalContext.current

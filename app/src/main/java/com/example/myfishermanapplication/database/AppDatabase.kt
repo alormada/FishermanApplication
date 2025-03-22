@@ -8,12 +8,14 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.example.myfishermanapplication.model.Catch
 import com.example.myfishermanapplication.model.Fish
 
 
-@Database(entities = [Fish::class], version = 11)
+@Database(entities = [Fish::class, Catch::class], version = 12)
 abstract class AppDatabase : RoomDatabase() {
     abstract fun fishDao(): FishDao
+    abstract fun catchDao(): CatchDao
 
     companion object {
         @Volatile
@@ -40,6 +42,7 @@ abstract class AppDatabase : RoomDatabase() {
 
                 CoroutineScope(Dispatchers.IO).launch {
                     populateDatabase(INSTANCE!!.fishDao())
+                    populateCatchDatabase(INSTANCE!!.catchDao())
                 }
             }
         }
@@ -65,11 +68,21 @@ abstract class AppDatabase : RoomDatabase() {
                 Fish(name = "Węgorz", length = "150", bait= "Rosówki, martwa rybka, wątroba", protectiveDimension = "70", description = "Wężokształtna ryba nocna, ceniona za smaczne mięso.", imageUri = "fish/wegorz.jpg"),
                 Fish(name = "Wzdręga", length = "40", bait= "Ciasto, kukurydza, białe robaki", protectiveDimension = "15", description = "Ryba o czerwonych płetwach, przypominająca płoć.", imageUri = "fish/wzdrega.jpg"),
                 Fish(name = "Zander", length = "100", bait= "Gumy, woblery, martwa rybka", protectiveDimension = "45", description = "Drapieżnik podobny do sandacza, często mylony z nim.", imageUri = "fish/zander.jpg"),
-                )
+            )
             fishDao.insertAll(predefinedFishes)
+        }
+
+        // (opcjonalne, jeśli chcesz mieć startowe dane Catch)
+        suspend fun populateCatchDatabase(catchDao: CatchDao) {
+            val predefinedCatches = listOf(
+                Catch(fishCount = "3", fishWeight = "5kg", location = "Jezioro Ładoga", notes = "Słoneczna pogoda, rano."),
+                Catch(fishCount = "1", fishWeight = "2kg", location = "Wisła, Warszawa", notes = "Silny nurt, trudne warunki.")
+            )
+            predefinedCatches.forEach { catchDao.insertCatch(it) }
         }
     }
 }
+
 
 
 
